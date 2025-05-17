@@ -1,9 +1,5 @@
 /**
-* Template Name: iPortfolio
-* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-* Updated: Jun 29 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
+* Author: Pho Keanghour
 */
 
 (function() {
@@ -203,6 +199,76 @@
       }
     }
   });
+
+
+  
+  
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault(); // Stop normal form submission
+  
+    const form = e.target;
+    const sendButton = document.getElementById('send-btn');
+  
+    // Show loading overlay on the button
+    sendButton.classList.add('loading');  // Add the 'loading' class to show the overlay
+  
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+  
+      if (response.ok) {
+        form.reset(); // Reset the form after successful submission
+        document.getElementById('popup').style.display = 'block'; // Show the popup
+        setTimeout(closePopup, 7000); // Close the popup automatically after 7 seconds
+      } else {
+        alert('There was a problem sending your message. Please try again.');
+      }
+    } catch (error) {
+      alert('Something went wrong. Please check your internet connection and try again.');
+    } finally {
+      // Remove loading overlay after the process is done
+      sendButton.classList.remove('loading'); // Remove the loading state
+    }
+  });
+  
+  // Close the popup when the button is clicked
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+  
+  
+  
+
+
+  // Function to calculate age based on the birthdate
+  function calculateAge(birthdate) {
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    
+    // If the birthday hasn't occurred yet this year, subtract 1 from the age
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
+  }
+
+  // Set the birthdate (use the format YYYY-MM-DD)
+  const birthdate = "2000-11-12"; // Replace with your actual birthdate
+
+  // Calculate the age
+  const age = calculateAge(birthdate);
+
+  // Update the "Age" in the HTML dynamically
+  document.getElementById('age').textContent = age;
 
   /**
    * Navmenu Scrollspy
