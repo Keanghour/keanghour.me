@@ -204,19 +204,6 @@ h6 {
 }
 
 
-.hero-buttons {
-  display: flex;        /* aligns buttons horizontally */
-  gap: 15px;            /* space between buttons */
-  margin-top: 20px;     /* space below typed text */
-}
-
-.hero-buttons .btn, 
-.hero-buttons .btn-hire-me {
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-
 @media (min-width: 1200px) {
 
   .header~main,
